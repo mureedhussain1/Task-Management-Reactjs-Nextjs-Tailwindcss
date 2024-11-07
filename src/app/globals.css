@@ -24,3 +24,41 @@ body {
 .ml-17 {
   margin-left: 65px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  padding: 4px;
+  margin-top: 0.75rem /* 12px */;
+  margin-bottom: 1rem /* 12px */;
+
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6d55e0; 
+}
+
+
+.max-h-70vh {
+  max-height: 70vh;
+}
+
+.max-h-80vh {
+  max-height: 80vh;
+}
+
+.max-h-90vh {
+  max-height: 88vh;
+}
