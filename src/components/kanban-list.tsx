@@ -1,16 +1,18 @@
-import { EffortLevel } from "@/enums/EffortLevel";
+"use client";
 import KanbanCard from "./kanban-card";
-import { Priority } from "@/enums/Priority";
 import { FC } from "react";
+import { useTasks } from "@/context/TaskContext";
 
 interface IKanbanList {
   title: string | null;
 }
 
 const KanbanList: FC<IKanbanList> = ({ title }) => {
+  const tasks = useTasks();
+
   return (
-    <div className="mx-3 w-1/3 min-w-80 rounded-md bg-blue-100 p-3">
-      <span>
+    <div className="max-h-90vh mx-3 w-1/3 min-w-80 overflow-hidden rounded-md bg-blue-100 py-3">
+      <span className="px-3 pt-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -31,8 +33,19 @@ const KanbanList: FC<IKanbanList> = ({ title }) => {
         </h1>
       </span>
 
-      <div className="py-3">
-        <KanbanCard
+      <div className="my-3 max-h-full overflow-y-auto px-3">
+        {tasks?.map((task) => (
+          <KanbanCard
+            key={task.id}
+            date={task.dueDate}
+            project={task.project}
+            taskTitle={task.title}
+            effort={task.effortLevel}
+            priority={task.priority}
+          />
+        ))}
+      </div>
+      {/* <KanbanCard
           date="MON"
           project="Kanban"
           effort={EffortLevel.MODERATE}
@@ -52,8 +65,7 @@ const KanbanList: FC<IKanbanList> = ({ title }) => {
           taskTitle={"Add configuration"}
           effort={undefined}
           priority={undefined}
-        />
-      </div>
+        /> */}
     </div>
   );
 };

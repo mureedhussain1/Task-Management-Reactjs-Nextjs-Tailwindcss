@@ -1,7 +1,6 @@
 import KanbanList from "./kanban-list";
 
-enum IKanbanBoardProps {}
-const KanbanBoard: React.FC<IKanbanBoardProps> = ({}) => {
+const KanbanBoard: React.FC = () => {
   return (
     <div className="flex">
       <KanbanList title="To-Do" />
