@@ -1,6 +1,6 @@
-"use client"; // This is a client component 👈🏽
+"use client";
 
-import { Task, TaskAction } from "@/model/task";
+import { Task, TaskAction } from "@/types/task";
 import {
   Dispatch,
   ReactNode,
@@ -12,7 +12,6 @@ import tasksReducer from "./TaskReducer";
 
 const TasksContext = createContext<Task[] | null>(null);
 const TasksDispatchContext = createContext<Dispatch<TaskAction> | null>(null);
-// const TasksDispatchContext = createContext(null);
 
 export function TasksProvider({
   children,

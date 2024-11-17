@@ -1,4 +1,4 @@
-import { Task, TaskAction } from "@/model/task";
+import { Task, TaskAction } from "@/types/task";
 import { Status } from "../enums/Status";
 import * as actions from "./ActionTypes";
 import { Priority } from "@/enums/Priority";
