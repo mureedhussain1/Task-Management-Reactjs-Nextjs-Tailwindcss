@@ -1,29 +1,53 @@
 "use client";
 
-import { Task, TaskAction } from "@/types/task";
+import { AppStateType, ActionType } from "@/types/state";
 import {
   Dispatch,
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useReducer,
 } from "react";
-import tasksReducer from "./TaskReducer";
+import { initialState, tasksListReducer } from "./TaskReducer";
+import { ActionData } from "@/types/task";
 
-const TasksContext = createContext<Task[] | null>(null);
-const TasksDispatchContext = createContext<Dispatch<TaskAction> | null>(null);
+const TasksContext = createContext<AppStateType | null>(null);
+const TasksDispatchContext = createContext<
+  Dispatch<ActionType<ActionData>> | undefined
+>(undefined);
+
+export const initializer = (emptyState: AppStateType) => {
+  const a =
+    typeof window === "object"
+      ? window.localStorage.getItem("tasks")
+      : undefined;
+  return a === null
+    ? initialState
+    : typeof a === "string"
+      ? JSON.parse(a)
+      : emptyState;
+};
 
 export function TasksProvider({
   children,
-  initialTasks,
+  emptyState,
 }: Readonly<{
   children: ReactNode;
-  initialTasks: Task[];
+  emptyState: AppStateType;
 }>) {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+  const [task, dispatch] = useReducer(
+    tasksListReducer,
+    emptyState,
+    initializer,
+  );
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(task));
+  }, [task]);
 
   return (
-    <TasksContext.Provider value={tasks}>
+    <TasksContext.Provider value={task}>
       <TasksDispatchContext.Provider value={dispatch}>
         {children}
       </TasksDispatchContext.Provider>
@@ -31,7 +55,7 @@ export function TasksProvider({
   );
 }
 
-export function useTasks() {
+export function useTasksContext() {
   return useContext(TasksContext);
 }
 

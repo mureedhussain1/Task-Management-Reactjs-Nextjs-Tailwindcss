@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SideNav from "../components/SideNav";
 import { TasksProvider } from "@/context/TaskContext";
-import { initialTasks } from "@/context/TaskReducer";
+import { emptyState } from "@/context/TaskReducer";
+import { ToastProvider } from "@/context/ToastProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,15 +32,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TasksProvider initialTasks={initialTasks}>
-          <div>
-            <aside className="absolute h-full min-h-screen w-16">
-              <SideNav />
-            </aside>
-            <div className="ml-17 min-h-screen overflow-y-hidden bg-blue-700">
-              {children}
+        <TasksProvider emptyState={emptyState}>
+          <ToastProvider>
+            <div>
+              <aside className="absolute h-full min-h-screen w-16">
+                <SideNav />
+              </aside>
+              <div className="ml-17 min-h-screen overflow-y-hidden bg-blue-700">
+                {children}
+              </div>
             </div>
-          </div>
+          </ToastProvider>
         </TasksProvider>
       </body>
     </html>

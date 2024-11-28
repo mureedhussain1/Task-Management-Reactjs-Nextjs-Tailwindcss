@@ -1,4 +1,4 @@
-"use client"; // This is a client component 👈🏽
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,7 @@ export default function SideNav() {
   function createTask() {
     dispatch?.({
       type: Actions.TASK_ADDED,
-      task: {
+      payload: {
         title: "New Task Added",
         dueDate: "Mon",
         id: 0,
@@ -19,6 +19,7 @@ export default function SideNav() {
         priority: undefined,
         status: undefined,
         project: "Kanban",
+        parentId: 1,
       },
     });
   }
@@ -57,12 +58,12 @@ export default function SideNav() {
             </svg>
           </div>
 
-          <div
+          <button
             onClick={createTask}
             className="cursor-pointer py-3 text-center text-gray-200 transition duration-300 ease-in-out hover:scale-105 hover:text-white"
           >
             <PiPlus size={32} />
-          </div>
+          </button>
         </div>
 
         <div>

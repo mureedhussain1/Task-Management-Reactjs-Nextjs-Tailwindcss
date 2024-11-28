@@ -1,3 +1,5 @@
+"use client";
+
 import { EffortLevel } from "@/enums/EffortLevel";
 import { Priority } from "@/enums/Priority";
 import DueDate from "./due-date";
@@ -19,8 +21,8 @@ const KanbanCard: React.FC<IKanbanCardProps> = ({
   taskTitle,
 }) => {
   return (
-    <div className="my-3 min-h-12 rounded bg-white p-3">
-      <h6 className="mb-4 font-sans text-sm font-semibold text-black">
+    <div className="my-3 min-h-12 cursor-grab rounded bg-white p-3">
+      <h6 className="mb-4 line-clamp-2 h-9 font-sans text-sm font-semibold text-black">
         {taskTitle}
       </h6>
 
